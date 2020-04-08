@@ -262,3 +262,25 @@ select users.name, posts.title from users, posts where users.id = posts.user_id;
 select u.name, p.title from users u, posts p where u.id = p.user_id;
 select u.name, p.title from users u, posts p where u.id = p.user_id and u.id = 1;
 ```
+
+## View
+
+```SQL
+create view taguchi_posts as # View making
+select u.name, p.title from users u, posts p where u.id = p.user_id and u.id = 1;
+\dv
+
+select * from taguchi_posts;
+drop view taguchi_posts;
+```
+
+## Transaction
+
+```SQL
+begin;
+update users set score = score - 1.0 where name = 'taguchi';
+update users set score = score + 1.0 where name = 'fkoji';
+commit;
+
+rollback; # Undo transaction
+```
