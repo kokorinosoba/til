@@ -42,10 +42,10 @@ psql [DB name] # Connect to DB
 ```
 
 ```SQL
-help # Display help
-\? # List of commands
-\l # List of DB
-\q # Quit
+help -- Display help
+\? -- List of commands
+\l -- List of DB
+\q -- Quit
 ```
 
 SQL Sentence separator: ;(semi-colon)
@@ -56,20 +56,21 @@ SQL Sentence separator: ;(semi-colon)
 create table [Table name] (title [Data type], body [Data type])
 create table posts (title varchar(255), body text);
 
-\dt # Show Data Table
-\d [table name] # Show column names
+\dt -- Show Data Table
+\d [table name] -- Show column names
 
-alter table posts rename to myposts; # rename table
-drop table myposts; # remove table
+alter table posts rename to myposts; -- rename table
+drop table myposts; -- remove table
 
-\i [file name] # Read external sql file
+\i [file name] -- Read external sql file
 ```
 
 # SQL Statements
 ## Data Types
 
 ```
-/* Comment
+-- Comment
+/* Comment (Multiple Lines)
   Data Types
   Integer: integer(int), real, serial(continuous number)
   Character:  char(5), varchar(255), text
@@ -93,20 +94,20 @@ create table posts (
 ## Data Restriction
 
 ```SQL
-not null # Error if null
-unique # not allowed
-check # check content
+not null -- Error if null
+unique -- not allowed
+check -- check content
 default
-primary key # (not null, unique)
+primary key -- (not null, unique)
 ```
 
 ## Insert Statement
 
 ```SQL
 insert into posts (title, body) values ('title1', 'body1');
-select * from posts; # Show all records
+select * from posts; -- Show all records
 insert into posts (title, body) values ('title2', 'body2');
-insert into posts (title, body) values ('title2', 'b3'); # Error
+insert into posts (title, body) values ('title2', 'b3'); -- Error
 ```
 
 ## Select Statement
@@ -133,14 +134,14 @@ insert into users (name, score, team) values
 
 ```SQL
 select * from users;
-\x # Turn on expanded Display
-select name, score from users; # indicate column
+\x -- Turn on expanded Display
+select name, score from users; -- indicate column
 ```
 
 ### Conditional Select Statement
 
 ```SQL
-select * from users where score > 4.0; # Show field by condition
+select * from users where score > 4.0; -- Show field by condition
 select * from users where score = 5.0;
 select * from users where score != 5.0;
 ```
@@ -158,9 +159,9 @@ select * from users where name like 'sa_aki';
 ### Record Sorting by Select Statement
 
 ```SQL
-select * from users order by score; # ascend
-select * from users order by score desc; # descend
-select * from users order by team; # Avairable for string
+select * from users order by score; -- ascend
+select * from users order by score desc; -- descend
+select * from users order by team; -- Avairable for string
 select * from users order by team, score desc;
 ```
 
@@ -175,14 +176,14 @@ select * from users order by score desc limit 3;
 ### Count / Sum up Records
 
 ```SQL
-select count(*) from users; # Number of records
-select distinct team from users; # uniq
+select count(*) from users; -- Number of records
+select distinct team from users; -- uniq
 select sum(score) from users;
 select max(score)
 select min()
 select avg()
-select team, sum(score) from users group by team; # Grouping with team
-select team, sum(score) from users group by team having sum(score) > 10.0; # Condition specification after selecting
+select team, sum(score) from users group by team; -- Grouping with team
+select team, sum(score) from users group by team having sum(score) > 10.0; -- Condition specification after selecting
 ```
 
 ### PostgreSQL Functions
@@ -192,7 +193,7 @@ Homepage > docs > Functions and Operators
 ```SQL
 select name, length(name) from users;
 select concat(name, ' (', team, ')') from users;
-select concat(name, ' (', team, ')') as namelabel from users; # Change name label
+select concat(name, ' (', team, ')') as namelabel from users; -- Change name label
 select substring(team, 1, 1) as teaminitial from users;
 select random();
 select * from users order by random() limit 1;
@@ -258,7 +259,7 @@ insert into posts (user_id, title, body) values
 ```
 
 ```SQL
-select users.name, posts.title from users, posts where users.id = posts.user_id; # Concat tables
+select users.name, posts.title from users, posts where users.id = posts.user_id; -- Concat tables
 select u.name, p.title from users u, posts p where u.id = p.user_id;
 select u.name, p.title from users u, posts p where u.id = p.user_id and u.id = 1;
 ```
@@ -266,7 +267,7 @@ select u.name, p.title from users u, posts p where u.id = p.user_id and u.id = 1
 ## View
 
 ```SQL
-create view taguchi_posts as # View making
+create view taguchi_posts as -- View making
 select u.name, p.title from users u, posts p where u.id = p.user_id and u.id = 1;
 \dv
 
@@ -282,5 +283,5 @@ update users set score = score - 1.0 where name = 'taguchi';
 update users set score = score + 1.0 where name = 'fkoji';
 commit;
 
-rollback; # Undo transaction
+rollback; -- Undo transaction
 ```
